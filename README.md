@@ -1,6 +1,8 @@
 # Simple-Html-Image-Gallery
 
-This repo is just A simple way to setup a simple image gallery on a personal website or someting.
+This repo is just A simple way to setup a simple image gallery on a personal website or someting.   
+[example](https://cabl.rodeo/Real/R_Art)
+
 
 # Setting up the Gallery Directory
 I Found it easier to put `SettingUpGalleries.py` in the base directory of the site so inputting the filepath is the easiest.
