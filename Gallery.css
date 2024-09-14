@@ -1,0 +1,28 @@
+
+/* This is the thing that will hold your images */
+.grid-container {
+    /* The ammount of images in a row*/
+    grid-template-columns: auto auto auto auto auto auto auto auto  ; 
+    display: grid;
+  }
+  
+/* How your art will actually be displated */
+.grid-item {
+    /* How big the art will be on the page*/
+        /* vw/vh is relative size on the screen*/
+    max-width: 10vw;
+    max-height: 20vh;   
+    
+    /*Outline for style and fun me thinks*/
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 30px;
+    text-align: center;
+    
+    /**/
+    margin: 1vw;
+    
+    /* transition is just here so it looks cool when resizing the screen ig */
+    transition:  max-width .3s;
+    align-self: center;
+    
+  }

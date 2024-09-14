@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    
+    <!-- make shure the file path is good for your website setup! -->
+    <link href="/Gallery.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+    <!-- make shure the file path is good for your website setup! -->
+  <script type = "text/javascript" src="/Gallery.js" ></script>
+
+<style>
+        body{
+
+            background-color: rgb(94, 89, 112);
+        }
+
+</style>
+
+    <body>
+
+        <!-- Just keep the id and class the same and it should populate swag style -->
+        <div class="grid-container" style="background-color: rgba(223, 191, 123, 0);"  id="pics">
+        </div>
+        <!-- Just put this below the element with the id on it u want to propogate -->
+        <script> displayFiles('/GalleryFiles') </script>
+           
+    </body>
+</html>
+
+
