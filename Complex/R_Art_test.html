@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabl Zone</title>
+      <!-- That funny embed thing-->
+        
+          <!-- HTML Meta Tags -->
+          <title>MAINPAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</title>
+          <meta name="description" content="Art, links, and other fun things.">
+
+          <!-- Facebook Meta Tags -->
+          <meta property="og:url" content="https://cabl.rodeo">
+          <meta property="og:type" content="website">
+          <meta property="og:title" content="MAINPAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!">
+          <meta property="og:description" content="Art, links, and other fun things.">
+          <meta property="og:image" content="https://cabl.rodeo/imgs/goofyahh.png">
+
+          <!-- Twitter Meta Tags -->
+          <meta property="twitter:domain" content="cabl.rodeo">
+          <meta property="twitter:url" content="https://cabl.rodeo">
+          <meta name="twitter:title" content="MAINPAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!">
+          <meta name="twitter:description" content="Art, links, and other fun things.">
+          <meta name="twitter:image" content="https://cabl.rodeo/imgs/funnyClouds.png">
+      
+          <meta name="theme-color" content="#fb9902">
+       
+          <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+
+    <link rel="shortcut icon" href= "https://cdn.discordapp.com/attachments/670283025883332608/841892098005139516/cablpaintstrans.png">
+
+
+  </head>
+
+  <script type = "text/javascript" src="/Complex/Gallery_Test.js" ></script>
+
+<style>
+
+    body{
+        background-color: black;
+        color: white;
+        
+        background-image: url(/imgs/stars.gif);
+        margin: .5%;
+        overflow-y:hidden;
+      }
+    
+    .center,.collums{
+        
+        margin: auto;
+        width: 55vw;
+        outline: rgba(255, 255, 255, 0) solid 10px;
+        background-color: rgb(223, 191, 123);
+        
+    }
+    
+    .collums{
+        
+        height: min(80vh);
+
+       position:absolute;
+
+    }
+
+
+
+    .grid-container{
+      overflow-y:auto;
+      grid-template-columns: auto auto auto auto auto auto;
+    }
+    .grid-item{
+      max-width: 10vw;
+      max-width: .3s;
+    }
+
+</style>
+
+    <body>
+        <div style="width: 10.5%; height: 100vh; background-color:rgb(155, 155, 155);  float: left; padding-left: 10px; ">
+
+          <p>Gallery</p>
+          Tag Search<br>
+          <input type="text" id="tags"><br>
+          <input type="submit" value="Search" onclick="loadImgs()"> <input type="submit" value="Clear" onclick="ClearTags()">
+          
+          <hr>
+          <span style="text-decoration: underline overline;">Tags</span> 
+          <div id="TagList">
+          
+          </div>
+
+        </div>
+        
+        <div class="grid-container" style="background-color: rgba(223, 191, 123, 225); height: 100vh;"  id="pics">
+            <script> displayFiles('/Complex/Art') </script>
+        </div>
+        
+    </body>
+</html>
