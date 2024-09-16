@@ -9,6 +9,10 @@ var currentlySelected : Button
 
 var outputFileName = "/FILES.json"
 
+func _ready() -> void:
+	$Settings.hide()
+	pass
+
 func OpenDirectory(dir):
 	$ColorRect.hide()
 	Directory = dir
@@ -22,6 +26,7 @@ func OpenDirectory(dir):
 	
 	print(DirAccess.get_files_at(Directory))
 	
+	# loading the images into the list thing
 	for i in DirAccess.get_files_at(Directory):
 		
 		# if its not a json file continue
@@ -50,6 +55,12 @@ func OpenDirectory(dir):
 			inst.connect("select",SelectImg)
 			
 			pass
+	
+	# setting tag presets
+	tagGroups = parcedDict.tagGroups
+	tagPresets = parcedDict.tagPresets
+	
+	loadSettings()
 	
 	pass
 
@@ -113,7 +124,9 @@ func _on_save_pressed() -> void:
 		pass
 	
 	var finalDict := {
-		"data":arr
+		"data":arr,
+		"tagPresets" : tagPresets,
+		"tagGroups" : tagGroups
 	}
 	
 	SaveFile.store_string(JSON.stringify(finalDict," "))
@@ -137,7 +150,7 @@ func showMsg(msg):
 	tween.tween_property(%TextSavedTo,"global_position",Vector2(2,679),.2) # off screen
 
 func TextChanged():
-#endregion
+
 	
 	if currentlySelected:
 		currentlySelected.ImgName = %NameEdit.text
@@ -146,7 +159,57 @@ func TextChanged():
 		pass
 	
 	pass
+#endregion
 
+
+var SelectedTagPreset : String = ""
+
+func setUpPresetUI(dict : Dictionary):
+	
+	# getting rid of the allready there items
+	%TagsPresetSelector.clear()
+	
+	for i in dict:
+		%TagsPresetSelector.add_item(i)
+	
+	%TagsPresetSelector.select(-1)
+	
+	pass
+
+func selectPreset(index):
+	
+	var a = %TagsPresetSelector.get_item_text(index)
+	
+	SelectedTagPreset = tagPresets[a]
+	
+	print(SelectedTagPreset)
+	
+	pass
+
+func appendTags():
+	
+	if SelectedTagPreset == "":
+		return
+		pass
+	
+	if %TagsEdit.text == "":
+		%TagsEdit.text += SelectedTagPreset
+	else:
+		%TagsEdit.text += ","+SelectedTagPreset
+		
+	
+	
+	
+	pass
+
+func replaceTags():
+	
+	if SelectedTagPreset == "":
+		return
+		pass
+		
+	%TagsEdit.text = SelectedTagPreset
+	pass
 
 #region TheSettings Menu
 
@@ -164,9 +227,24 @@ func hideSettings():
 	
 	processSettings()
 	
+	
 	pass
 
-
+func loadSettings():
+	
+	setUpPresetUI(tagPresets)
+	
+	%TagPresets.text = ""
+	# setting up tag presets
+	for i in tagPresets:
+		%TagPresets.text += i + ":" + tagPresets[i]+"\n"
+		pass
+	
+	%TagGroups.text = ""
+	for i in tagGroups:
+		%TagGroups.text += i + ":" + tagGroups[i]+"\n"
+	
+	pass
 
 func processSettings():
 	# if everything went good
@@ -180,6 +258,7 @@ func processSettings():
 		tagPresets = {}
 		# getting the indivisual lines
 		for lines in %TagPresets.text.split("\n"):
+			
 			# spliting the lines to the name and the tags
 			var sides = lines.split(":")
 			
@@ -190,9 +269,13 @@ func processSettings():
 				close = false
 				break
 			
-			# setting the tag
-			tagPresets[sides[0]] = sides[1]
-			#Dictionary
+			# if theres actuall someting in the line Ig
+			if lines != "":
+				# setting the tag
+				tagPresets[sides[0]] = sides[1]
+				#Dictionary
+
+
 			pass
 		pass
 		
@@ -209,7 +292,9 @@ func processSettings():
 				close = false
 				break
 			
-			tagGroups[sides[0]] = sides[1]
+			# if theres actuall someting in the line Ig
+			if lines != "":
+				tagGroups[sides[0]] = sides[1]
 			pass
 		
 		var fails = -1
@@ -236,6 +321,9 @@ func processSettings():
 	
 	if close:
 		settings.hide()
-	
-	
+		setUpPresetUI(tagPresets)
+		
+
+
+
 #endregion
