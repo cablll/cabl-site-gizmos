@@ -161,7 +161,21 @@ file_mode = 2
 access = 2
 show_hidden_files = true
 
+[node name="TextSavedTo" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 679.0
+offset_right = 1146.0
+offset_bottom = 702.0
+text = "asdffasdf"
+horizontal_alignment = 2
+text_overrun_behavior = 4
+
 [connection signal="pressed" from="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer/SelectDirectory" to="." method="_on_select_directory_pressed"]
 [connection signal="pressed" from="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/Button" to="." method="OPENFILE"]
+[connection signal="text_changed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/NameEdit" to="." method="TextChanged"]
+[connection signal="text_changed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/TagsEdit" to="." method="TextChanged"]
+[connection signal="text_changed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/DescEdit" to="." method="TextChanged"]
 [connection signal="dir_selected" from="ColorRect/FileDialog" to="." method="OpenDirectory"]

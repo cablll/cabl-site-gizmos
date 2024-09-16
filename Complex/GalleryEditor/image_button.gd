@@ -20,7 +20,7 @@ func setup():
 	else:
 		text = "This File Cannot be Displayed, still loaded tho."
 	
-	print(DIR,FileName)
+	#print(DIR,FileName)
 	
 	pass
 

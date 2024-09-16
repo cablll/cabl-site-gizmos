@@ -6,11 +6,13 @@ const IMAGE_BUTTON = preload("res://ImageButton.tscn")
 
 var currentlySelected : Button
 
+var outputFileName = "/FILES.json"
+
 func OpenDirectory(dir):
 	$ColorRect.hide()
 	Directory = dir
 	# loading the json file if it exists
-	var a := FileAccess.open(Directory+"/FILES.json",FileAccess.READ_WRITE)
+	var a := FileAccess.open(Directory+outputFileName,FileAccess.READ_WRITE)
 	var parcedDict :Dictionary = JSON.parse_string( a.get_as_text())
 	
 	#deleting old Files Displayed
@@ -30,6 +32,7 @@ func OpenDirectory(dir):
 			# checking if the file was allready in the json file
 			for ii in parcedDict["data"]:
 				if i == ii["file"]:
+					print(i,"  ",ii["file"])
 					inst.FileName = ii["file"]
 					inst.ImgName = ii["name"]
 					inst.Tags = ",".join(ii["tags"])
@@ -74,9 +77,14 @@ func _on_select_directory_pressed() -> void:
 	
 	pass # Replace with function body.
 
+## saving the output to file
 func _on_save_pressed() -> void:
+	# if a directory is Chosen
+	if !Directory:
+		return
+	
 	# openeing the file u will be wrighting to
-	var SaveFile := FileAccess.open(Directory+"/FILES1.json",FileAccess.WRITE_READ)
+	var SaveFile := FileAccess.open(Directory+outputFileName,FileAccess.WRITE_READ)
 	# the array the data will be stored in
 	var arr := []
 	
@@ -111,4 +119,25 @@ func _on_save_pressed() -> void:
 	
 	SaveFile.close()
 	
+	## tweenting the funny message
+	%TextSavedTo.text = 'FILE.json saved to: ' + Directory + outputFileName
+	
+	var tween := get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUART)
+	##679
+	tween.tween_property(%TextSavedTo,"global_position",Vector2(2,621),.5) # on screen
+	tween.tween_property(%TextSavedTo,"global_position",Vector2(2,621),1.5) # waiting
+	tween.tween_property(%TextSavedTo,"global_position",Vector2(2,679),.2) # off screen
+	#%TextSavedTo.global_position.y
 	pass # Replace with function body.
+
+
+func TextChanged():
+	
+	if currentlySelected:
+		currentlySelected.ImgName = %NameEdit.text
+		currentlySelected.Tags = %TagsEdit.text
+		currentlySelected.Desc = %DescEdit.text
+		pass
+	
+	pass

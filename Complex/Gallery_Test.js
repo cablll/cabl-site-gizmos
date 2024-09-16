@@ -12,7 +12,7 @@ function displayFiles(dirr){
     
     dir = dirr
     
-    var a = dir + "/FILES1.json";
+    var a = dir + "/FILES.json";
 
     fetch(a)
         .then((response) => response.json())
@@ -100,10 +100,10 @@ function loadImgs( ){
         if (display){
 
             // checking if the file is an image or not
-            if (dta["file"].endsWith(".png") || dta["file"].endsWith(".jpeg") || dta["file"].endsWith(".gif") || dta["file"].endsWith(".webp")){
+            if (dta["file"].endsWith(".png") || dta["file"].endsWith(".jpg") || dta["file"].endsWith(".gif") || dta["file"].endsWith(".webp")){
                 // Actually adding the element to the page
                     // Replace this bit with whatever you want to have the thing to do when you click on it
-                    src.innerHTML += `<a href ="${dir}/${dta["file"]}" title="${dta["name"]}" target ="_Blank" > <img class= "grid-item"src="${dir}/${dta["file"]}"> </a>`;
+                    src.innerHTML += `<img title="${dta["name"]}" class= "grid-item"src="${dir}/${dta["file"]}">`;
             }
             else if (dta["file"].endsWith(".mp4")){ //if its like an mp4 or someting (can prob be expanded to other video dta i dont know i think)
                 src.innerHTML += `<video  controls img class= "grid-item" > <source src= "${dir}/${dta["file"]}" type="video/mp4">  </video>`;

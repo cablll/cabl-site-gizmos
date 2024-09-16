@@ -25,7 +25,7 @@ function displayFiles(dir){
             for(var i = 0; i <Object.keys(Files).length ;i+=1){
                 
                 // checking if the file is an image or not
-                if (Files[i].endsWith(".png") || Files[i].endsWith(".jpeg") || Files[i].endsWith(".gif") || Files[i].endsWith(".webp")){
+                if (Files[i].endsWith(".png") || Files[i].endsWith(".jpg") || Files[i].endsWith(".gif") || Files[i].endsWith(".webp")){
                     // Actually adding the element to the page
                         // Replace this bit with whatever you want to have the thing to do when you click on it
                     src.innerHTML += `<img class="grid-item"src="${dir}/${Files[i]}">`;
