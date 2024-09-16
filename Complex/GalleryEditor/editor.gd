@@ -16,9 +16,20 @@ func _ready() -> void:
 func OpenDirectory(dir):
 	$ColorRect.hide()
 	Directory = dir
+	
+	var newJson = false
+	
+	# checking if anything is there
+	if !FileAccess.file_exists(Directory+outputFileName):
+		newJson = true
 	# loading the json file if it exists
 	var a := FileAccess.open(Directory+outputFileName,FileAccess.READ_WRITE)
-	var parcedDict :Dictionary = JSON.parse_string( a.get_as_text())
+	
+	var parcedDict :Dictionary
+	
+	if !newJson:
+		var b = a.get_as_text()
+		parcedDict = JSON.parse_string( b )
 	
 	#deleting old Files Displayed
 	for i in %ArtList.get_children():
@@ -35,15 +46,16 @@ func OpenDirectory(dir):
 			%ArtList.add_child(inst)
 			inst.DIR = Directory
 			
-			# checking if the file was allready in the json file
-			for ii in parcedDict["data"]:
-				if i == ii["file"]:
-					print(i,"  ",ii["file"])
-					inst.FileName = ii["file"]
-					inst.ImgName = ii["name"]
-					inst.Tags = ",".join(ii["tags"])
-					inst.Desc = ii["desc"]
-					pass
+			if !newJson:
+				# checking if the file was allready in the json file
+				for ii in parcedDict["data"]:
+					if i == ii["file"]:
+						print(i,"  ",ii["file"])
+						inst.FileName = ii["file"]
+						inst.ImgName = ii["name"]
+						inst.Tags = ",".join(ii["tags"])
+						inst.Desc = ii["desc"]
+						pass
 			# checking if the file name hasent allready been assigned IG
 			if !inst.ImgName:
 				#adding the filename to the instance thing
@@ -56,12 +68,12 @@ func OpenDirectory(dir):
 			
 			pass
 	
-	# setting tag presets
-	tagGroups = parcedDict.tagGroups
-	if parcedDict.has("tagPresets"):
-		tagPresets = parcedDict.tagPresets
-	
-	loadSettings()
+	if !newJson:
+		# setting tag presets
+		tagGroups = parcedDict.tagGroups
+		if parcedDict.has("tagPresets"):
+			tagPresets = parcedDict.tagPresets
+		loadSettings()
 	
 	pass
 
