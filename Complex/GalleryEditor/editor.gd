@@ -294,7 +294,8 @@ func processSettings():
 			
 			# if theres actuall someting in the line Ig
 			if lines != "":
-				tagGroups[sides[0]] = sides[1]
+				# id : Name of group
+				tagGroups[sides[1]] = sides[0]
 			pass
 		
 		var fails = -1

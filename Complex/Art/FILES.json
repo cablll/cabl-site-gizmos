@@ -4,13 +4,13 @@
    "desc": "",
    "file": "TextureJpeg copy 2.jpg",
    "name": "",
-   "tags": []
+   "tags": ["m-Funny"]
   },
   {
    "desc": "",
    "file": "TextureJpeg copy.jpg",
    "name": "",
-   "tags": []
+   "tags": ["c-redmen"]
   },
   {
    "desc": "",
@@ -63,12 +63,12 @@
   }
  ],
  "tagGroups": {
-  "na": "a",
-  "nb": "b",
-  "nc": "c"
+  "c": "Character",
+  "m": "Meta"
  },
  "tagPresets": {
   "FunnyTag": "silly,goofy,fun",
+  "bigGreenGaming": "green,big,gaming",
   "test": "tag1,tag2,tag4,tag45"
  }
 }

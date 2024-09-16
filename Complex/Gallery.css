@@ -12,3 +12,12 @@
     max-width: .3s;
     padding: 5px;
   }
+
+/* TagGroup can be colored making css classed with the the same names as the group names (Case sencitive) */
+.Meta{
+  color: rgb(0, 0, 0);
+}
+
+.Character{
+  color: blueviolet;
+}

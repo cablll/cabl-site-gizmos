@@ -197,7 +197,6 @@ access = 2
 show_hidden_files = true
 
 [node name="Settings" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -252,7 +251,6 @@ Example:
 cat:cat,animal,drawing
 dog:dog,animal,drawing
 "
-text = "test:tag1,tag2"
 
 [node name="HSeparator3" type="HSeparator" parent="Settings/VBoxContainer"]
 layout_mode = 2
@@ -272,9 +270,6 @@ tooltip_text = "Format:
 Example:
 meta:m
 "
-text = "na:a
-nb:b
-nc:c"
 
 [node name="Label3" type="Label" parent="Settings/VBoxContainer"]
 layout_mode = 2

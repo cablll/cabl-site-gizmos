@@ -1,4 +1,5 @@
 let Data = {}
+let tagGoups = {}
 let ready = false
 
 let dir
@@ -19,6 +20,7 @@ function displayFiles(dirr){
         .then((json) => {
             // saving the data
             Data = json["data"];
+            tagGoups = json["tagGroups"];
             // prints it
             console.log(Data)
             // geting the list of tags that all of the art curently has
@@ -126,6 +128,7 @@ function FunctionHere(file){
 // getting the list of tags that the player has inputed
 function getTags(){
 
+
     // getting the input element
     var box = document.getElementById("tags");
 
@@ -171,6 +174,8 @@ function GetTagList(){
 
     let tagList = []
 
+    console.log(tagGoups)
+
     // Iterating therw all the tags 
     for (let i = 0; i<Data.length;i++){
         let tagArr = Data[i]["tags"]
@@ -185,17 +190,77 @@ function GetTagList(){
 
     }
 
+    // adding the tags to the side bar
     let tagElem = document.getElementById("TagList");
 
     tagElem.innerHTML = "";
 
+//// creating the Tag Group holders ////
+    // creating the group with Notags on them
+    tagElem.innerHTML= `
+    <span style="text-decoration: underline overline;" class="NoGroup" >Tags</span> 
+        <div id="NoGroup" class="NoGroup">
+
+        </div><br>
+    `;
+    // Creating the custom tag group holders
+    for (const [key, value] of Object.entries(tagGoups)) {
+        //console.log(key, value);
+        tagElem.innerHTML+= `
+            <span style="text-decoration: underline overline;" class="${value}">${value}</span> 
+            <div id="${value}" class="${value}">
+
+        </div><br>
+    `;
+      }
+
+
     for (let i = 0; i<tagList.length;i++){
+        //console.log(tagList[i])
 
-        tagElem.innerHTML += `<span onclick="addTag('${tagList[i]}')" >- ${tagList[i]}</span><br>`;
+        splitTag = tagList[i].split("-");
 
+        // if it has no group in the front
+        if (splitTag.length == 1){
+            tagGroup = document.getElementById("NoGroup")
+            tagGroup.innerHTML += `<span onclick="addTag('${tagList[i]}')" >- ${tagList[i]}</span><br>`;
+        }
+        // if its in a tag group
+        else{
+
+            console.log("hai ", splitTag)
+            
+            for (const [key, value] of Object.entries(tagGoups)) {
+
+                if( splitTag[0] == key ){
+
+                    console.log("MATCH");
+
+                    tagGroup = document.getElementById(value)
+                    tagGroup.innerHTML += `<span onclick="addTag('${tagList[i]}')" >- ${splitTag[1]}</span><br>`;
+
+                }
+                else{
+
+
+                }
+
+              }
+
+        }
     }
 
 }
+
+/*
+
+<span style="text-decoration: underline overline;">Tags</span> 
+<div id="TagList">
+
+</div>
+
+*/
+
 
 function addTag(newTag){
 
