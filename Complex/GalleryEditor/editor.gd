@@ -68,6 +68,15 @@ func OpenDirectory(dir):
 			
 			pass
 	
+	# clearing all the stuff
+	%FileNameDisplayer.text = ""
+	%TagsEdit.text=""
+	%DescEdit.text = ""
+	%TagGroups.text = ""
+	%TagPresets.text = ""
+	
+	currentlySelected = null
+	
 	if !newJson:
 		# setting tag presets
 		tagGroups = parcedDict.tagGroups
@@ -75,6 +84,7 @@ func OpenDirectory(dir):
 			tagPresets = parcedDict.tagPresets
 		loadSettings()
 	
+
 	pass
 
 func SelectImg(Bttn : Button):
@@ -210,7 +220,7 @@ func appendTags():
 	else:
 		%TagsEdit.text += ","+SelectedTagPreset
 		
-	
+	%TagsEdit.emit_signal("text_changed")
 	
 	
 	pass
@@ -222,6 +232,7 @@ func replaceTags():
 		pass
 		
 	%TagsEdit.text = SelectedTagPreset
+	%TagsEdit.emit_signal("text_changed")
 	pass
 
 #region TheSettings Menu
@@ -275,6 +286,16 @@ func processSettings():
 			# spliting the lines to the name and the tags
 			var sides = lines.split(":")
 			
+			# its just empy lol
+			if sides.size() == 1:
+				break
+			
+			if sides.size() != 2:
+				showMsg("Preset not formated corectly \""+lines+"\". Should be \":\". Groups not saved.")
+				tagGroups = oldGroup
+				close = false
+				break
+			
 			# checking for duplacate tag names
 			if tagPresets.has(sides[0]):
 				showMsg("duplacate tagPreset name: \""+sides[0]+"\". Presets not saved.")
@@ -296,7 +317,18 @@ func processSettings():
 	if %TagGroups.text != "" and close:
 		tagGroups = {}
 		for lines in %TagGroups.text.split("\n"):
-			var sides = lines.split(":")
+			var sides : PackedStringArray= lines.split(":")
+			
+			# its just empy lol
+			if sides.size() == 1:
+				break
+			
+			# if theres not the correct size
+			if sides.size() != 2:
+				showMsg("Goup not formated corectly \""+lines+"\". Should be \":\". Groups not saved.")
+				tagGroups = oldGroup
+				close = false
+				break
 			
 			# checking for duplacate group names
 			if tagGroups.has(sides[0]):
