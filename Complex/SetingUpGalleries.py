@@ -6,6 +6,16 @@ import json
 #    This file Is best suted to be placed in the base directory of your site.
 #       Provide the Local paths to the directory where the files you want to display are 
 #
+#    If you are using this script over the JSON editor, the filenames have to be 
+#            [image Name`tag,tag2,No_spaces_in_tags`Description].png
+#
+#    Other Valid file name formats:
+#           - file``.png     
+#           - file`tag,tag2`.png     
+#           - file``desc.png     
+#           - `tag`.png     
+#           - ``.png     
+#
 #####
 
 # array of directorys that your going to update (you can do multiple of them in this array ^_^!)
@@ -28,8 +38,7 @@ for xx in dirs:
     # getting the absolute path the the directory
     abs_file_path = os.path.join(scriptDir,xx)
 
-    # removing the old filelist
-    fileList = {}
+    # Array that holds the dictonarys 
     FileArr = []
 
     # appending every img/mp4 file into a string
@@ -40,46 +49,31 @@ for xx in dirs:
             if x.startswith("X_") or x.startswith("x_"):
                 pass
             else:# appending the filename to the output file
-                #print(x)
-                #fileList += x +","
-
+                
+                # spliting the file name into other
                 parts = x.split("`")
                 
+                # will not append to file if it is not in the correct format
+                if len(parts) == 3:
+                    
+                    # makes the tags lowercase
+                    lower=[]
+                    for ggg in parts[1].split(","):
+                        lower.append(ggg.lower())
 
-                
-                # makes the tags lowercase
-                lower=[]
-                for ggg in parts[1].split(","):
-                    lower.append(ggg.lower())
+                    dic = {
+                        "file": x,
+                        "name":parts[0],
+                        "tags": lower,
+                        "desc": parts[2]
+                    }
 
-                dic = {
-                    "file": x,
-                    "name":parts[0],
-                    "tags": lower,
-                    "desc": parts[2]
-                }
+                    # appending the dictonary to the array of dictonary 
+                    FileArr.append(dic)
 
-                #print(dic)
-
-                FileArr.append(dic)
-
-                pass
+                    pass
     
-    #print(FileArr)
 
-    fileList = {"data":FileArr}
-    # gets rid of the last character [I forgot why i did this]
-    #fileList = fileList[:-1]
-
-    # creating the new array file to the Gallery directory
-    #f = open(abs_file_path+"\FILES.txt","w")
-    
-    # Writing The array to the file
-    #f.write( json.dump(fileList))
-
-    # validation output
-    #print("LIST: ",fileList)
-
-
+    # saving the dictonary to the json file in the directory
     with open(abs_file_path+"\FILES.json","w") as fp:
-        json.dump(fileList,fp)
+        json.dump( {"data":FileArr} ,fp)

@@ -5,50 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>More Complex Gallry</title>
 
-
+    <link href="/Complex/Gallery.css" rel="stylesheet" type="text/css" media="all">
   </head>
   <!-- Change this line to point to wherever you actually put jsFile -->
-  <script type = "text/javascript" src="/Complex/Gallery_Test.js" ></script>
+  <script type = "text/javascript" src="/Complex/Gallery.js" ></script>
 
 <style>
 
     body{
         background-color: black;
         color: white;
-        
-        background-image: url(/imgs/stars.gif);
         margin: .5%;
         overflow-y:hidden;
       }
     
-    .center,.collums{
-        
-        margin: auto;
-        width: 55vw;
-        outline: rgba(255, 255, 255, 0) solid 10px;
-        background-color: rgb(223, 191, 123);
-        
-    }
-    
-    .collums{
-        
-        height: min(80vh);
-
-       position:absolute;
-
-    }
-
-
-
-    .grid-container{
-      overflow-y:auto;
-      grid-template-columns: auto auto auto auto auto auto;
-    }
-    .grid-item{
-      max-width: 10vw;
-      max-width: .3s;
-      padding: 5px;
-    }
+      .grid-container{
+        background-color: rgba(223, 191, 123, 225); 
+        height: 100vh;
+      }
 
 </style>
 
@@ -58,7 +32,8 @@
           <p>Gallery</p>
           Tag Search<br>
           <input type="text" id="tags"><br>
-          <input type="submit" value="Search" onclick="loadImgs()"> <input type="submit" value="Clear" onclick="ClearTags()">
+          <input type="submit" value="Search" onclick="loadImgs()">
+          <input type="submit" value="Clear" onclick="ClearTags()">
           
           <hr>
           <span style="text-decoration: underline overline;">Tags</span> 
@@ -68,7 +43,8 @@
 
         </div>
         
-        <div class="grid-container" style="background-color: rgba(223, 191, 123, 225); height: 100vh;"  id="pics">
+
+        <div class="grid-container" id="pics">
             <script> displayFiles('/Complex/Art') </script>
         </div>
         

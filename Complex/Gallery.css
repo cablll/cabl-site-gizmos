@@ -1,0 +1,14 @@
+/* How the grid or images will be displayed */
+.grid-container{
+    /* Affects how going outside the bounds of the div or whatever will scroll 
+        - auto makes it so it dosent expand the div just scroll in it*/
+    overflow-y:auto;
+    /* How many rows there will be in the grid */
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+/* How the actual images will be displayed */
+.grid-item{
+    max-width: 10vw;
+    max-width: .3s;
+    padding: 5px;
+  }

@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dahbjmxuolkhg"]
+[gd_scene load_steps=4 format=3 uid="uid://dahbjmxuolkhg"]
 
 [ext_resource type="Script" path="res://editor.gd" id="1_66g62"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_d3sdf"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_350k7"]
+thickness = 31
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -40,11 +43,14 @@ layout_mode = 2
 [node name="SelectDirectory" type="Button" parent="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Changes the selected directory
+!!! DOES NOT SAVE CURRENT DIRECTORY SAVE FIRST !!!"
 text = "SelectDirectory"
 
 [node name="Save" type="Button" parent="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Generates the json file for the selected directory"
 text = "Save
 "
 
@@ -81,6 +87,8 @@ alignment = 2
 
 [node name="Settings" type="Button" parent="HSplitContainer/SettingsSide/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "not implemented yet u_u
+"
 text = "Settings"
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/SettingsSide/VBoxContainer"]
@@ -106,6 +114,7 @@ text = "FileName
 
 [node name="Button" type="Button" parent="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Opens the file in your compouters file viewer."
 text = "OPEN FILE"
 
 [node name="FileNameDisplayer" type="Label" parent="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer"]
@@ -131,6 +140,9 @@ text = "Tags"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 87.935)
 layout_mode = 2
+tooltip_text = "There should be no spaces in the tags.
+Tags should be seperated by \",\"
+"
 
 [node name="Desc" type="Label" parent="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -152,7 +164,7 @@ grow_vertical = 2
 color = Color(0.472424, 1.13107e-06, 0.280466, 0.286275)
 
 [node name="FileDialog" type="FileDialog" parent="ColorRect"]
-title = "Choose a Directory"
+title = "Open a Directory"
 position = Vector2i(160, 96)
 size = Vector2i(853, 540)
 ok_button_text = "Select Current Folder"
@@ -160,6 +172,89 @@ dialog_close_on_escape = false
 file_mode = 2
 access = 2
 show_hidden_files = true
+
+[node name="Settings" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(6.97896e-07, 0.44627, 0.38724, 0.533333)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "These settings are saved in the \"FILE.json\" created by saving, make shure to save to not loose changes.
+"
+
+[node name="VSeparator" type="VSeparator" parent="Settings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_350k7")
+
+[node name="CloseSettings" type="Button" parent="Settings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "CLOSE"
+
+[node name="HSeparator2" type="HSeparator" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_d3sdf")
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "TagPresets
+"
+
+[node name="TagPresets" type="TextEdit" parent="Settings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+tooltip_text = "Format:
+[Name Of Preset]:tag1,tag2,tag3[NewLine]
+[Name Of Preset2]:tag1,tag4,tag2
+
+Example:
+cat:cat,animal,drawing
+dog:dog,animal,drawing
+"
+text = "test:tag1,tag2"
+
+[node name="HSeparator3" type="HSeparator" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_d3sdf")
+
+[node name="Label2" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "TagGroups"
+
+[node name="TagGroups" type="TextEdit" parent="Settings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+tooltip_text = "Format:
+[Name of Group]: [GroupLabel]
+
+Example:
+meta:m
+"
+text = "na:a
+nb:b
+nc:c"
+
+[node name="Label3" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+text = "Usage: [GroupLabel]-Tag   |   Example: m-2d"
 
 [node name="TextSavedTo" type="Label" parent="."]
 unique_name_in_owner = true
@@ -174,8 +269,10 @@ text_overrun_behavior = 4
 
 [connection signal="pressed" from="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer/SelectDirectory" to="." method="_on_select_directory_pressed"]
 [connection signal="pressed" from="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="HSplitContainer/SettingsSide/VBoxContainer/HBoxContainer/Settings" to="." method="openSettings"]
 [connection signal="pressed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/Button" to="." method="OPENFILE"]
 [connection signal="text_changed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/NameEdit" to="." method="TextChanged"]
 [connection signal="text_changed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/TagsEdit" to="." method="TextChanged"]
 [connection signal="text_changed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/DescEdit" to="." method="TextChanged"]
 [connection signal="dir_selected" from="ColorRect/FileDialog" to="." method="OpenDirectory"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer/CloseSettings" to="." method="hideSettings"]
