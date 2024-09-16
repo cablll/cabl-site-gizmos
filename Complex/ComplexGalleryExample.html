@@ -27,26 +27,30 @@
 </style>
 
     <body>
-        <div style="width: 10.5%; height: 100vh; background-color:rgb(155, 155, 155);  float: left; padding-left: 10px; ">
-
-          <p>Gallery</p>
-          Tag Search<br>
-          <input type="text" id="tags"><br>
-          <input type="submit" value="Search" onclick="loadImgs()">
-          <input type="submit" value="Clear" onclick="ClearTags()">
+      <!-- The style tags in the elements are only there so there can be the sidebar setup for the example, the actual style dosent matter -->
+        <div id="TagBar" style="width: 10.5%; height: 100vh; background-color:rgb(155, 155, 155);  float: left;  padding-left: 10px; ">
           
-          <hr>
-          <div id="TagList">
-          <span style="text-decoration: underline overline;">Tags</span> 
-          
+          <!-- Contains non dinamicly created navigation elements -->
+          <div id="SearchArea">
+            <p>Gallery</p>
+            Tag Search<br>
+            <input type="text" id="tags"><br> <!-- This has to be here unless you rewrite the thing to store the tags searched for internally but whatever -->
+            <input type="submit" value="Search" onclick="loadImgs()">
+            <input type="submit" value="Clear" onclick="ClearTags()">
           </div>
+
+          <hr>
+
+          <!-- Where the tags will be loaded -->
+          <div id="TagList"></div>
 
         </div>
         
-
-        <div class="grid-container" id="pics">
-            <script> displayFiles('/Complex/Art') </script>
+        <!-- This div actually displays the images -->
+        <div class="grid-container" id="ImgDisplayer">
         </div>
+        <!-- this script actually calls the function that sets up everything, make shure its at the bottom of the page-->
+        <script> displayFiles('/Complex/Art') </script>
         
     </body>
 </html>

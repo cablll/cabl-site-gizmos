@@ -5,18 +5,23 @@
     overflow-y:auto;
     /* How many rows there will be in the grid */
     grid-template-columns: auto auto auto auto auto auto;
+
   }
 /* How the actual images will be displayed */
 .grid-item{
-    max-width: 10vw;
+    max-width: 10vw;  
+    max-height: 10vw;  
     max-width: .3s;
     padding: 5px;
   }
+
 
 /* TagGroup can be colored making css classed with the the same names as the group names (Case sencitive) */
 .Meta{
   color: rgb(0, 0, 0);
 }
+
+
 
 .Character{
   color: blueviolet;

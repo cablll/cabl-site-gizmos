@@ -12,13 +12,18 @@ signal select(bttn)
 func setup():
 	
 	if (FileName.ends_with(".png")or 
-		FileName.ends_with(".jpg")or
 		FileName.ends_with(".webp")
 		):
 		loadImg()
 		pass
+	if (FileName.ends_with(".jpg")):
+		icon = load("res://Jpeg.png")
+		pass
 	else:
-		text = "This File Cannot be Displayed, still loaded tho."
+		text = "Cannot Preview File"
+		tooltip_text = "Cannot Preview File\n"
+	
+	tooltip_text+=FileName
 	
 	#print(DIR,FileName)
 	

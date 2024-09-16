@@ -40,7 +40,7 @@ function displayFiles(dirr){
 
 //  Actually doing the thing  //
             // getting the GridParent element in whereever it was been called from.
-            var src = document.getElementById("pics");
+            var src = document.getElementById("ImgDisplayer");
             // getting rid of all of the elements that may have been there allready
             src.innerHTML = "";
 
@@ -65,7 +65,7 @@ function displayFiles(dirr){
 // actually putting the images on the Page
 function loadImgs( ){
     // getting the GridParent element in whereever it was been called from.
-    var src = document.getElementById("pics");
+    var src = document.getElementById("ImgDisplayer");
     // getting rid of all of the elements that may have been there allready
     src.innerHTML = "";
     

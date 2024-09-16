@@ -58,7 +58,8 @@ func OpenDirectory(dir):
 	
 	# setting tag presets
 	tagGroups = parcedDict.tagGroups
-	tagPresets = parcedDict.tagPresets
+	if parcedDict.has("tagPresets"):
+		tagPresets = parcedDict.tagPresets
 	
 	loadSettings()
 	
@@ -242,7 +243,7 @@ func loadSettings():
 	
 	%TagGroups.text = ""
 	for i in tagGroups:
-		%TagGroups.text += i + ":" + tagGroups[i]+"\n"
+		%TagGroups.text += tagGroups[i] + ":" + i+"\n"
 	
 	pass
 

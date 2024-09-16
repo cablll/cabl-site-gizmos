@@ -9,12 +9,23 @@ import json
 #    If you are using this script over the JSON editor, the filenames have to be 
 #            [image Name`tag,tag2,No_spaces_in_tags`Description].png
 #
+#---FILE NAME FORMAT----------------------------------------------------------------------------------------------------------#
+#
 #    Other Valid file name formats:
-#           - file``.png     
-#           - file`tag,tag2`.png     
-#           - file``desc.png     
-#           - `tag`.png     
-#           - ``.png     
+#          OK - file``.png                  || Sections can be blank but there has to be 3 of them for the scrypt to work
+#          OK - file`tag,tag2`.png     
+#          OK - file``desc.png     
+#          OK - `tag`.png     
+#          OK - ``.png
+#        !NO! - file`tag.png                || must have all 3 sections
+#        !NO! - tag`desc.png                || must have all 3 sections
+
+# ---TAG GROUP FORMAT---------------------------------------------------------------------------------------------------------#
+#          OK - file`m-Tag_one`desc.png     || only use "-" for tag groups things
+
+#          OK - file`Tag_one`desc.png     
+#          OK - file`Tag-one`desc.png     
+#        !NO! - file`m-Tag-one`desc.png     || if you are using group tags dont use "-" to seperate words in the tag itself
 #
 #####
 
@@ -22,6 +33,16 @@ import json
         # dont put the first `/` it dosent like that
 # the directorys that your going to upgerade
 dirs = [ "Art"]
+
+
+# dictonary of tag groups that tags can be organised in
+    # Format= "GroupID":"GroupName"
+    # when putting a tag into a group=
+    #           "GroupID"-Tag
+tagGroups =  {
+  "c": "Character",
+  "m": "Meta"
+ }
 
 # getting the scripts location in the pc
 scriptDir = os.path.dirname(__file__)
@@ -53,7 +74,7 @@ for xx in dirs:
                 # spliting the file name into other
                 parts = x.split("`")
                 
-                # will not append to file if it is not in the correct format
+                # will not add to file if it is not in the correct format : "file`tags`desc.png"
                 if len(parts) == 3:
                     
                     # makes the tags lowercase
@@ -73,7 +94,8 @@ for xx in dirs:
 
                     pass
     
-
     # saving the dictonary to the json file in the directory
     with open(abs_file_path+"\FILES.json","w") as fp:
-        json.dump( {"data":FileArr} ,fp)
+        json.dump( {"data":FileArr,
+                    "tagGroups":tagGroups} 
+                ,fp)

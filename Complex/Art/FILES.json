@@ -1,64 +1,54 @@
 {
  "data": [
   {
-   "desc": "",
-   "file": "TextureJpeg copy 2.jpg",
-   "name": "",
-   "tags": ["m-Funny"]
-  },
-  {
-   "desc": "",
-   "file": "TextureJpeg copy.jpg",
-   "name": "",
-   "tags": ["c-redmen"]
-  },
-  {
-   "desc": "",
-   "file": "TextureJpeg.jpg",
-   "name": "",
-   "tags": []
-  },
-  {
    "desc": "Image for testing.png",
-   "file": "testimg12`tag2,tag1,tag1`Image for testing.png",
-   "name": "testimg12",
+   "file": "redBall`c-redmen,tag1,m-png`Image for testing.png",
+   "name": "redBall",
    "tags": [
-    "tag2",
+    "c-redmen",
     "tag1",
-    "tag1"
+    "m-png"
    ]
   },
   {
    "desc": "Image for testing - Copy.png",
-   "file": "testimg12`tag2,tag1`Image for testing - Copy.png",
+   "file": "testimg12`tag2,tag1,m-tall`Image for testing - Copy.png",
    "name": "testimg12",
    "tags": [
     "tag2",
-    "tag1"
+    "tag1",
+    "m-tall"
    ]
   },
   {
    "desc": "Image for testing.png",
-   "file": "testimg2`tag2`Image for testing.png",
+   "file": "testimg12`tag2,tag1,tag1,m-wide`Image for testing.png",
+   "name": "testimg12",
+   "tags": [
+    "tag2",
+    "tag1",
+    "tag1",
+    "m-wide"
+   ]
+  },
+  {
+   "desc": "Image for testing.png",
+   "file": "testimg2`c-redmen,c-blumen,m-png`Image for testing.png",
    "name": "testimg2",
    "tags": [
-    "tag2"
+    "c-redmen",
+    "c-blumen",
+    "m-png"
    ]
   },
   {
-   "desc": "Image for testing.png",
-   "file": "testimg3`tag3`Image for testing.png",
+   "desc": "Image for testing.jpg",
+   "file": "testimg3`c-green_men,m-jpg,tag3`Image for testing.jpg",
    "name": "testimg3",
    "tags": [
+    "c-green_men",
+    "m-jpg",
     "tag3"
-   ]
-  },
-  {
-   "desc": "Image for testing.png",
-   "file": "testimg`tag1`Image for testing.png",
-   "name": "testimg",
-   "tags": [
-    "tag1"
    ]
   }
  ],
@@ -67,8 +57,6 @@
   "m": "Meta"
  },
  "tagPresets": {
-  "FunnyTag": "silly,goofy,fun",
-  "bigGreenGaming": "green,big,gaming",
-  "test": "tag1,tag2,tag4,tag45"
+
  }
 }
