@@ -1,4 +1,5 @@
 extends Button
+class_name Entry
 
 @export var FileName : String
 @export var ImgName : String
@@ -16,8 +17,10 @@ func setup():
 		):
 		loadImg()
 		pass
-	if (FileName.ends_with(".jpg")):
+	elif (FileName.ends_with(".jpg")):
 		icon = load("res://Jpeg.png")
+		text = "Cannot Preview File"
+		tooltip_text = "Cannot Preview File\n"
 		pass
 	else:
 		text = "Cannot Preview File"
@@ -41,7 +44,6 @@ func loadImg():
 	icon = Textur
 	
 	pass
-
 
 
 

@@ -13,6 +13,7 @@ func _ready() -> void:
 	$Settings.hide()
 	pass
 
+## openeing the thing to edit
 func OpenDirectory(dir):
 	$ColorRect.hide()
 	Directory = dir
@@ -87,6 +88,7 @@ func OpenDirectory(dir):
 
 	pass
 
+## selecting the piece to edit
 func SelectImg(Bttn : Button):
 	
 	currentlySelected = Bttn
@@ -161,6 +163,7 @@ func _on_save_pressed() -> void:
 	#%TextSavedTo.global_position.y
 	pass # Replace with function body.
 
+## showing funny error thing
 func showMsg(msg):
 		## tweenting the funny message
 	%TextSavedTo.text = msg
@@ -172,9 +175,8 @@ func showMsg(msg):
 	tween.tween_property(%TextSavedTo,"global_position",Vector2(2,621),1.5) # waiting
 	tween.tween_property(%TextSavedTo,"global_position",Vector2(2,679),.2) # off screen
 
+## setting the stuff in the file thing
 func TextChanged():
-
-	
 	if currentlySelected:
 		currentlySelected.ImgName = %NameEdit.text
 		currentlySelected.Tags = %TagsEdit.text
@@ -186,7 +188,7 @@ func TextChanged():
 
 
 var SelectedTagPreset : String = ""
-
+## adding to the preset clicker thing
 func setUpPresetUI(dict : Dictionary):
 	
 	# getting rid of the allready there items
@@ -199,6 +201,7 @@ func setUpPresetUI(dict : Dictionary):
 	
 	pass
 
+## selecting the preset that the thing has
 func selectPreset(index):
 	
 	var a = %TagsPresetSelector.get_item_text(index)
@@ -209,6 +212,7 @@ func selectPreset(index):
 	
 	pass
 
+## appending tags to the selected piece
 func appendTags():
 	
 	if SelectedTagPreset == "":
@@ -225,6 +229,7 @@ func appendTags():
 	
 	pass
 
+## replacing the tags on the selected piece
 func replaceTags():
 	
 	if SelectedTagPreset == "":
@@ -238,7 +243,7 @@ func replaceTags():
 #region TheSettings Menu
 
 @onready var settings: ColorRect = $Settings
-
+## Opens The Settings Tab 
 func openSettings():
 	settings.show()
 	pass
@@ -247,6 +252,8 @@ func openSettings():
 var tagPresets := {}
 ## dictonary of valid tag groups
 var tagGroups :={}
+
+## hiding the setting tab obvisouly
 func hideSettings():
 	
 	processSettings()
@@ -254,6 +261,7 @@ func hideSettings():
 	
 	pass
 
+## Loading the settings from the file
 func loadSettings():
 	
 	setUpPresetUI(tagPresets)
@@ -270,6 +278,7 @@ func loadSettings():
 	
 	pass
 
+## saving the inputed things into the file + corectness checking
 func processSettings():
 	# if everything went good
 	var close = true
@@ -290,6 +299,7 @@ func processSettings():
 			if sides.size() == 1:
 				break
 			
+			# formated wrongly
 			if sides.size() != 2:
 				showMsg("Preset not formated corectly \""+lines+"\". Should be \":\". Groups not saved.")
 				tagGroups = oldGroup
@@ -373,3 +383,31 @@ func processSettings():
 
 
 #endregion
+
+# Showing the things that the plr selected swag
+func VisibleToggle(index: int) -> void:
+	
+	# iterating therw all the things
+	for img : Entry in %ArtList.get_children():
+		# checking all the things
+		match index:
+			0: ## showing all
+				img.show()
+				pass
+			1: ## no title
+				# trying to see if its just allll empty
+				if !img.ImgName.strip_escapes().dedent().strip_edges().is_empty():
+					img.hide()
+				pass
+			2: ## no tags
+				if !img.Tags.strip_escapes().dedent().strip_edges().is_empty():
+					img.hide()
+				pass
+			3: ## no Desc
+				if !img.Desc.strip_escapes().dedent().strip_edges().is_empty():
+					img.hide()
+				pass
+		
+		pass
+	
+	pass # Replace with function body.

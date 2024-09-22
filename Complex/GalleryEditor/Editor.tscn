@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dahbjmxuolkhg"]
+[gd_scene load_steps=5 format=3 uid="uid://dahbjmxuolkhg"]
 
 [ext_resource type="Script" path="res://editor.gd" id="1_66g62"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qgcx1"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_d3sdf"]
 
@@ -53,6 +55,29 @@ layout_mode = 2
 tooltip_text = "Generates the json file for the selected directory"
 text = "Save
 "
+
+[node name="VSeparator" type="VSeparator" parent="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qgcx1")
+
+[node name="Show" type="Label" parent="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Show : "
+
+[node name="ShowSelector" type="OptionButton" parent="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+allow_reselect = true
+item_count = 4
+popup/item_0/text = "All"
+popup/item_1/text = "No Title"
+popup/item_1/id = 1
+popup/item_2/text = "No Tags"
+popup/item_2/id = 2
+popup/item_3/text = "No Desc"
+popup/item_3/id = 3
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/ArtSIde/VBoxContainer"]
 layout_mode = 2
@@ -290,6 +315,7 @@ text_overrun_behavior = 4
 
 [connection signal="pressed" from="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer/SelectDirectory" to="." method="_on_select_directory_pressed"]
 [connection signal="pressed" from="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="item_selected" from="HSplitContainer/ArtSIde/VBoxContainer/HBoxContainer/ShowSelector" to="." method="VisibleToggle"]
 [connection signal="pressed" from="HSplitContainer/SettingsSide/VBoxContainer/HBoxContainer/Settings" to="." method="openSettings"]
 [connection signal="pressed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/Button" to="." method="OPENFILE"]
 [connection signal="text_changed" from="HSplitContainer/SettingsSide/VBoxContainer/ScrollContainer/VBoxContainer/NameEdit" to="." method="TextChanged"]
