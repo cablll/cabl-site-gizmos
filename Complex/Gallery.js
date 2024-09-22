@@ -1,16 +1,27 @@
+// the array of images in the json file
 let Data = {}
+// the tag groups from the json file
 let tagGoups = {}
-let ready = false
 
+// the directory being serviced
 let dir
+
+// the type of interaction that clicking on the images will do
+let style = 0
+    // default values
 
 let tags = []
 // adding the funny images to the page
     // Example displayFiles('/GalleryFiles')
 
-function displayFiles(dirr){
+
+//////////// lOADING IMAGES
+
+function displayFiles(dirr , sty = 0){
     // getting the FILES.txt from the directory if its not there then it simply will not 
     
+    style = sty;
+
     dir = dirr
     
     var a = dir + "/FILES.json";
@@ -28,37 +39,7 @@ function displayFiles(dirr){
             // loading all the stuff
             loadImgs();
         } )
-
-/*   
-    // Loading the file as text i think
-    fetch(a)
-        .then((res => res.text()))
-        .then((text) => {
-
-            // splitting the file into an array 
-            var Files = text.split(',');
-
-//  Actually doing the thing  //
-            // getting the GridParent element in whereever it was been called from.
-            var src = document.getElementById("ImgDisplayer");
-            // getting rid of all of the elements that may have been there allready
-            src.innerHTML = "";
-
-            // Iterating threw all the 
-            for(var i = 0; i <Object.keys(Files).length ;i+=1){
-                
-                // checking if the file is an image or not
-                if (Files[i].endsWith(".png") || Files[i].endsWith(".jpeg") || Files[i].endsWith(".gif") || Files[i].endsWith(".webp")){
-                    // Actually adding the element to the page
-                        // Replace this bit with whatever you want to have the thing to do when you click on it
-                        src.innerHTML += `<a href ="${dir}/${Files[i]}" target ="_Blank" > <img class= "grid-item"src="${dir}/${Files[i]}"> </a>`;
-                }
-                else if (Files[i].endsWith(".mp4")){ //if its like an mp4 or someting (can prob be expanded to other video files i dont know i think)
-                    src.innerHTML += `<video  controls img class= "grid-item" > <source src= "${dir}/${Files[i]}" type="video/mp4">  </video>`;
-               }
-            }
-        })
-        .catch((e) => console.error(e));*/  
+  
 }
 
 
@@ -75,6 +56,8 @@ function loadImgs( ){
     console.log(tags);
 
     for (let i = 0; i<Data.length;i++){
+
+        console.log(i)
 
         let dta = Data[i]
         //console.log(`Name:${dta["name"]}\nTags:${dta["tags"]}\nDesc:${dta["desc"]}\n\nFiles:${dta["file"]}`);
@@ -104,8 +87,24 @@ function loadImgs( ){
             // checking if the file is an image or not
             if (dta["file"].endsWith(".png") || dta["file"].endsWith(".jpg") || dta["file"].endsWith(".gif") || dta["file"].endsWith(".webp")){
                 // Actually adding the element to the page
-                    // Replace this bit with whatever you want to have the thing to do when you click on it
-                    src.innerHTML += `<img title="${dta["name"]}" class= "grid-item"src="${dir}/${dta["file"]}">`;
+                switch (style) {
+                    default: // just adds the image to the page
+                        src.innerHTML += `<img title="${dta["name"]}" class= "grid-item"src="${dir}/${dta["file"]}">`;
+                        break;  
+
+                    case 1:// Opens Image in new tab on click
+                        src.innerHTML += `<a href = "${dir}/${dta["file"]}" target = "_Blank" ><img title="${dta["name"]}" class= "grid-item"src="${dir}/${dta["file"]}"></a>`;
+
+                        break;
+                    case 2:// Opens in the viewer thing on click
+                        src.innerHTML += `<img onclick="showViewer(${i})" title="${dta["name"]}" class= "grid-item"src="${dir}/${dta["file"]}">`;
+                        break;
+                    
+                    case 3:// Runs a function on click
+                        src.innerHTML += `<img onclick="FunctionHere('${dir}/${dta["file"]}')" title="${dta["name"]}" class= "grid-item"src="${dir}/${dta["file"]}">`;
+                        break;
+                }
+
             }
             else if (dta["file"].endsWith(".mp4")){ //if its like an mp4 or someting (can prob be expanded to other video dta i dont know i think)
                 src.innerHTML += `<video  controls img class= "grid-item" > <source src= "${dir}/${dta["file"]}" type="video/mp4">  </video>`;
@@ -124,6 +123,8 @@ function FunctionHere(file){
     alert(`YOU CLICK ME YAY: "${file}"`);
 
 }
+
+//////////////// TAGS STUFF
 
 // getting the list of tags that the player has inputed
 function getTags(){
@@ -159,17 +160,6 @@ function ClearTags(){
 
 }
 
-// Just Adding the immages to the page
-    // src.innerHTML += `<img class="grid-item"src="${dir}/${Files[i]}">`;
-    
-// Opening the clicked file in a new tab for bigger viewing
-    //src.innerHTML += `<a href ="${dir}/${Files[i]}" target ="_Blank" > <img class= "grid-item"src="${dir}/${Files[i]}"> </a>`;
-
-// Clicking it triggers some javascript thing
-    // src.innerHTML += `<img OnClick="FunctionHere('${dir}/${Files[i]}')" class="grid-item"src="${dir}/${Files[i]}">`;
-
-
-
 function GetTagList(){
 
     let tagList = []
@@ -184,6 +174,7 @@ function GetTagList(){
         // checking if tag is not allready in the tag list
         for( let ii = 0; ii<tagArr.length;ii++ ) {
             if(!tagList.includes(tagArr[ii])){
+                // adding the new tag to the tag list
                 tagList.push(tagArr[ii]);
             }
         }
@@ -192,7 +183,7 @@ function GetTagList(){
 
     // adding the tags to the side bar
     let tagElem = document.getElementById("TagList");
-
+    // eracing all the new tags
     tagElem.innerHTML = "";
 
 //// creating the Tag Group holders ////
@@ -214,7 +205,7 @@ function GetTagList(){
     `;
       }
 
-
+    // actually adding the tags
     for (let i = 0; i<tagList.length;i++){
         //console.log(tagList[i])
 
@@ -223,21 +214,21 @@ function GetTagList(){
         // if it has no group in the front
         if (splitTag.length == 1){
             tagGroup = document.getElementById("NoGroup")
-            tagGroup.innerHTML += `<span onclick="addTag('${tagList[i]}')" >- ${tagList[i]}</span><br>`;
+            tagGroup.innerHTML += `<span class="tag" onclick="addTag('${tagList[i]}')" >- ${tagList[i]}</span><br>`;
         }
         // if its in a tag group
         else{
 
-            console.log("hai ", splitTag)
+//            console.log("hai ", splitTag)
             
             for (const [key, value] of Object.entries(tagGoups)) {
 
                 if( splitTag[0] == key ){
 
-                    console.log("MATCH");
+  //                  console.log("MATCH");
 
                     tagGroup = document.getElementById(value)
-                    tagGroup.innerHTML += `<span onclick="addTag('${tagList[i]}')" >- ${splitTag[1]}</span><br>`;
+                    tagGroup.innerHTML += `<span class="tag" onclick="addTag('${tagList[i]}')" >- ${splitTag[1]}</span><br>`;
 
                 }
                 else{
@@ -252,16 +243,7 @@ function GetTagList(){
 
 }
 
-/*
-
-<span style="text-decoration: underline overline;">Tags</span> 
-<div id="TagList">
-
-</div>
-
-*/
-
-
+// Adding a tag to the search box
 function addTag(newTag){
 
     //console.log(newTag);
@@ -293,4 +275,38 @@ function addTag(newTag){
 
     loadImgs();
 
+}
+
+//////////    IMAGE VIEWER
+
+// loading all the stuff on the bigger viewer if u dont want the 
+function showViewer(index){
+
+    // showing the viewer thing
+    document.getElementById("displayer").style.display = "";
+
+    // getting the data of the selected image
+    var dta = Data[index];
+
+    // loading the image
+    document.getElementById("Image").src = `${dir}/${dta["file"]}`;
+    // loading the name
+    document.getElementById("Name").innerText = `${dta["name"]}`;
+    // loading the description
+    document.getElementById("Desc").innerText = `${dta["desc"]}`;
+    // loading the tags
+        // deleting the allready there tags
+    document.getElementById("Tags").innerHTML = "Tags: ";
+    
+    for (let i = 0; i<dta["tags"].length;i++){ // Iterating threw the tags the art has
+
+        document.getElementById("Tags").innerHTML +=`<span class="tag" onclick="addTag('${dta["tags"][i]}')" >${dta["tags"][i]}</span>, `;
+    }
+
+    console.log(dta);
+}
+
+// closing the viewer thing
+function closeViewer(){
+    document.getElementById("displayer").style.display = "none";
 }

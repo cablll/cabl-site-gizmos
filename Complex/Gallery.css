@@ -24,3 +24,29 @@
 .Character{
   color: blueviolet;
 }
+
+
+
+
+
+/* Once agin just a way to style the display viewer thing, feel free to change if u want */
+.displayer{
+  position: absolute;
+  background-color: cornflowerblue;
+  top: 1.5%;
+  left: 11.4%;
+  width: 87.5%;
+  height: 97%;
+  overflow: auto;
+}
+
+
+/* makes the tags look clickable */
+.tag{
+  text-decoration: underline;
+  font-style: normal;
+}
+
+.tag:hover{
+  font-style: italic;
+}

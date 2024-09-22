@@ -24,6 +24,7 @@
         height: 100vh;
       }
 
+
 </style>
 
     <body>
@@ -49,8 +50,20 @@
         <!-- This div actually displays the images -->
         <div class="grid-container" id="ImgDisplayer">
         </div>
+        
+        <!--  -->
+        <div class="displayer" style="display: none;" id="displayer" > 
+          <input type="submit" value="Close" onclick="closeViewer()"><br>
+          <img id="Image" style="max-width: 95%; max-height: 85%; margin-left: 2.5%;" src="/Complex/Art/testimg3`c-green_men,m-jpg,tag3`Image for testing.jpg">
+          <hr>
+          <h2 id="Name" >Name</h2> 
+          <h3 id="Desc">DESC</h3>
+          <h3 id="Tags">tags</h3>
+
+        </div>
+        
         <!-- this script actually calls the function that sets up everything, make shure its at the bottom of the page-->
-        <script> displayFiles('/Complex/Art') </script>
+        <script> displayFiles('/Complex/Art',2) </script>
         
     </body>
 </html>
