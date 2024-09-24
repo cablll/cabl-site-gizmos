@@ -54,8 +54,8 @@
         <!-- this div will be what shows up when you click on images and you have it set to 2 in the display files function call -->
         <div class="displayer" style="display: none;" id="displayer" > 
           <input type="submit" value="Close" onclick="closeViewer()"><br> <!--Closes the viwer -->
-          <img id="Image" style="max-width: 95%; max-height: 85%; margin-left: 2.5%;" src="/Complex/Art/testimg3`c-green_men,m-jpg,tag3`Image for testing.jpg"> <!-- displays the image-->
-          <hr>
+          <img id="Image" style="max-width: 95%; max-height: 85%; margin-left: 2.5%;" src=""> <!-- displays the image-->
+        <hr>
           <h2 id="Name">Name</h2> <!-- displays the name of the file -->
           <h3 id="Desc">DESC</h3> <!-- displays the description of the file -->
           <h3 id="Tags">tags</h3> <!-- displays the tags of the file -->
@@ -63,7 +63,7 @@
         </div>
         
         <!-- this script actually calls the function that sets up everything, make shure its at the bottom of the page-->
-        <script> displayFiles('/Complex/Art',0) </script>
+        <script> displayFiles('/Complex/Art',2) </script>
         <!--0:Nothing displayed on click -->
         <!--1:Open in new tab on click -->
         <!--2:Shows clicked file in a vierwer thing where you can view the Tags name and description -->

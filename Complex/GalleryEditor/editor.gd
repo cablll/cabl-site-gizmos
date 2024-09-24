@@ -389,6 +389,8 @@ func VisibleToggle(index: int) -> void:
 	
 	# iterating therw all the things
 	for img : Entry in %ArtList.get_children():
+		
+		img.show()
 		# checking all the things
 		match index:
 			0: ## showing all
