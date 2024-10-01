@@ -10,3 +10,7 @@ Currently Avalable:
 
 [Image-Board-Type-Gallery](https://github.com/cablll/cabl-site-gizmos/wiki/Image-Board-Type-Gallery)     [DL](https://github.com/cablll/cabl-site-gizmos/releases/tag/GalleryTypeDisplayer) 
 -  Image Board Type Gallery(IBTG) Is a simple javascript implementation of a image board that lets you display image/video files to a webpage,  with tagging capabilities.   
+
+
+[Theme Switcher](https://github.com/cablll/cabl-site-gizmos/wiki/Image-Board-Type-Gallery)     [DL](https://github.com/cablll/cabl-site-gizmos/releases/tag/ThemeSwitcher) 
+-  Javascript file that lets u set up theme switching on your website
