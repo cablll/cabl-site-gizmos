@@ -84,6 +84,8 @@ function loadImgs( ){
 
         if (display){
 
+
+
             // checking if the file is an image or not
             if (dta["file"].endsWith(".png") || dta["file"].endsWith(".jpg") || dta["file"].endsWith(".gif") || dta["file"].endsWith(".webp")){
                 // Actually adding the element to the page

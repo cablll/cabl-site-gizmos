@@ -1,0 +1,49 @@
+<!--
+    Directory Display Script (DDS)
+
+    Display a directory of images on a webpage easily and simply ^_^......
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    
+    <!-- make shure the file path is good for your website setup! -->
+        <!-- This is the link to the actual theme -->
+        <!-- Make shure it has the class 'theme' on the one or else nothing will change -->
+    <link class="theme" href="/ThemeSwitching/CSS/theme1.css" rel="stylesheet" type="text/css" media="all">
+        <!-- This is the link to the Page Layout -->
+    <link href="/ThemeSwitching/CSS/Layout.css" rel="stylesheet" type="text/css" media="all">
+                                <!--They can be the same but for simplicity their seperated like this-->
+
+    </head>
+    <!-- make shure the file path is good for your website setup! -->
+    <script type = "text/javascript" src="/ThemeSwitching/ThemeSwitching.js" ></script>
+<style>
+
+
+</style>
+    <body>
+
+      <div>
+
+        Theme Selector<br> 
+        <select name="theme" onchange="pickTheme(this.value)">
+          <!-- value will be the file path to the css file for the theme -->
+          <option value="/ThemeSwitching/CSS/theme1.css">Select Theme</option>
+          <option value="/ThemeSwitching/CSS/theme1.css">Theme1(default)</option>
+          <option value="/ThemeSwitching/CSS/theme2.css">Theme2</option>
+        </select>
+
+        <p class="b1">Text Block 1</p>
+        <p class="b2">Text Block 2</p>
+        <img id="testImg" src="Test1.png">
+
+      </div>
+
+    </body>
+</html>
+
+

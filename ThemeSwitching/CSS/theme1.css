@@ -1,0 +1,18 @@
+body{
+    background-color: rgb(94, 89, 112);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/* Changing class propertys*/
+.b1{
+    font-size: x-large;
+}
+.b2{
+    font-size: xx-large;
+}
+
+/*Changing elements properties depengind on their ID*/
+#testImg{
+    height: 300px;
+    content: url(/ThemeSwitching/Test1.png); /*Switching the image using css*/
+}

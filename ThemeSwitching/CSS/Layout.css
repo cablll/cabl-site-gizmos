@@ -1,0 +1,15 @@
+
+/* Stuff in this file will not be changed by the other 2 themes unless overwritten by them */
+/* Used to lay out the page */
+.b1{
+    width: 300px;
+    position: relative;
+    left: 100px;
+    padding-bottom: 30px;
+}
+
+.b2{
+    position: absolute;
+    right: 500px;
+    top: 600px;
+}

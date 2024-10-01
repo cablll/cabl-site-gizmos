@@ -1,0 +1,24 @@
+body{
+    background-color: rgb(105, 63, 63);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* Changing class propertys*/
+.b1{
+    font-size: xx-large;
+}
+.b2{
+    font-size: x-large;
+}
+
+.b2::before{
+    content: "Text added via CSS ^_^! "; /*Apending text to a p element using css*/
+}
+
+#testImg{
+    height: 400px;
+    position: relative;
+    content: url(/ThemeSwitching/Test2.jpg); /*Switching the image using css*/
+    left: 100px;
+}
