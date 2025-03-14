@@ -3,6 +3,22 @@ let Data = {}
 // the tag groups from the json file
 let tagGoups = {}
 
+
+// the max ammount of pages you can have
+let maxPage
+// the max amount of images the page can display
+let MaxPerPage = 2;
+// the currently selected page
+let CurrentPage = 0;
+
+// the image display bounds
+let DisplayFrom = 0;
+let DisplayTo = MaxPerPage;
+
+// the ammount of images you have
+let ImageAmmount
+
+
 // the directory being serviced
 let dir
 
@@ -34,6 +50,8 @@ function displayFiles(dirr , sty = 0){
             tagGoups = json["tagGroups"];
             // prints it
             console.log(Data)
+            // getting the ammount of entries there is
+            ImageAmmount = Data.length
             // geting the list of tags that all of the art curently has
             GetTagList();
             // loading all the stuff
@@ -55,7 +73,8 @@ function loadImgs( ){
     
     console.log(tags);
 
-    for (let i = 0; i<Data.length;i++){
+    //for (let i = 0; i<ImageAmmount;i++){  // Comment this ouf if u want to only display to a point
+    for (let i = DisplayFrom; i<DisplayTo;i++){ // comment this out if u want 2 display all at once
 
         console.log(i)
 
@@ -275,6 +294,10 @@ function addTag(newTag){
 
     }
 
+    // setting the to the first page
+    SetPageToZero()
+
+    // loading all the images
     loadImgs();
 
 }
@@ -311,4 +334,66 @@ function showViewer(index){
 // closing the viewer thing
 function closeViewer(){
     document.getElementById("displayer").style.display = "none";
+}
+
+
+
+//////////    CHANGING PAGES
+
+function ChgPages(page){
+
+    // getting the max ammount of pages you can go 2
+    maxPage =  Math.ceil(ImageAmmount / MaxPerPage) -1; // -1 cause the counter starts at 0 
+
+
+    // cannont increment higher
+    if (page == 1 &&(CurrentPage == maxPage)){
+        return;
+    }
+    // cannont deincrement lower
+    if (page == -1 &&(CurrentPage == 0)){
+        return;
+    }
+
+    // changes the page
+    CurrentPage += page;
+
+    //let src = document.getElementById("CurrentPage").innerHTML = String(CurrentPage);
+    let src = document.getElementById("CurrentPage");
+
+    //////////  Changing the page display in the current page dispolayer thing
+    // ereasing the current text
+    src.innerHTML = "";
+
+    if (CurrentPage != 0){
+        //src.innerHTML += String(CurrentPage-1)+",";
+    }
+    src.innerHTML += String(CurrentPage);
+    if (CurrentPage != maxPage){
+        //src.innerHTML += ","+String(CurrentPage+1);
+    }
+
+    //console.log(src );
+    DisplayFrom = CurrentPage * MaxPerPage
+    DisplayTo = DisplayFrom + MaxPerPage
+
+    if (DisplayTo > ImageAmmount){
+        DisplayTo = ImageAmmount
+    }
+
+    console.log("-"+DisplayFrom);
+    console.log(DisplayTo);
+
+    loadImgs();
+
+}
+
+function SetPageToZero(){
+
+    DisplayFrom = 0;
+    DisplayTo = MaxPerPage
+
+    CurrentPage = 0;
+    document.getElementById("CurrentPage").innerHTML = 0;
+
 }

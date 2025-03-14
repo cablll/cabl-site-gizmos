@@ -50,3 +50,7 @@
 .tag:hover{
   font-style: italic;
 }
+
+#PageSelector{
+  text-align: center;
+}
